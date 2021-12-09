@@ -169,12 +169,12 @@ def MenTor(ListPosition,MAX,C,w,RadiusRatio,Limit,DeBug):
         maxaward = 0
         indexBB = 0
 
-        for i in ListPosition:
-            sumx = sumx + (i.get_position_x()) * i.get_traffic()
-            sumy = sumy + (i.get_position_y()) * i.get_traffic()
-            sumw = sumw + i.get_traffic()
-            if i.get_traffic() > maxw:
-                maxw = i.get_traffic()
+        for i in ListPosition:                              # Sua theo de bai cua minh
+            sumx = sumx + (i.get_position_x()) * i.get_weight()
+            sumy = sumy + (i.get_position_y()) * i.get_weight()
+            sumw = sumw + i.get_weight()
+            if i.get_weight() > maxw:
+                maxw = i.get_weight()
         xtt = sumx / sumw
         ytt = sumy / sumw
 
