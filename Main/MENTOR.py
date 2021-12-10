@@ -23,7 +23,7 @@ def MenTor(ListPosition,MAX,C,w,RadiusRatio,Limit,DeBug):
     ListBackboneType1 = []
 
     for i in ListPosition:
-        if i.get_traffic() / C > w:
+        if i.get_weight() / C > w:
             # i.print()
             ListBackboneType1.append(i)
             ListPosition.remove(i)
@@ -190,7 +190,7 @@ def MenTor(ListPosition,MAX,C,w,RadiusRatio,Limit,DeBug):
         if DeBug:
             print("MaxDistance = {:<6} & Max Weight: {:<3}".format(round(maxdc,2), maxw))
         for i in ListPosition:
-            i.set_award((0.5 * (maxdc - i.get_distance() / maxdc)) + (0.5 * i.get_traffic() / maxw))
+            i.set_award((0.5 * (maxdc - i.get_distance() / maxdc)) + (0.5 * i.get_weight() / maxw))
             if i.get_award() > maxaward:
                 maxaward = i.get_award()
 
@@ -227,7 +227,7 @@ def MenTor(ListPosition,MAX,C,w,RadiusRatio,Limit,DeBug):
 
         for i in ListMentor:
             for j in i:
-                print(j.get_name(), end=' ')
+                print(j.get_name(), end='._.')
             print()
 
     Node.matplot_mentor(ListMentor,MAX)
