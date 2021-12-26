@@ -4,6 +4,8 @@ import MENTOR
 import EsauWilliam
 
 
+import pandas as pd
+import openpyxl
 MAX = 1000
 NumNode = 150
 RadiusRatio = 0.3
@@ -36,13 +38,13 @@ for i in range(NumNode):
     # ListPosition.sort(key=sortListPosition)
 
 for i in range(NumNode):
-    if i == 2 | i == 11 | i == 28 :
+    if i == 2 or i == 11 or i == 28 :
         ListPosition[i].set_weight(27)
-    elif i == 16 | i == 21 | i == 48 :
+    elif i == 16 or i == 21 or i == 48 :
         ListPosition[i].set_weight(9)
-    elif i == 36 | i == 41 | i == 46 :
+    elif i == 36 or i == 41 or i == 46 :
         ListPosition[i].set_weight(3)
-    elif i == 56 | i == 44 | i == 86 :
+    elif i == 56 or i == 44 or i == 86 :
         ListPosition[i].set_weight(7)
     else:
         ListPosition[i].set_weight(1)
@@ -51,20 +53,26 @@ for i in range(NumNode):
 
 ListPosition.sort(key=sortListPosition)
 print("---------Kết quả topology mạng (sắp xếp theo trục tọa độ Ox)-------------")
+import xlsxwriter
+outWorkbook = xlsxwriter.Workbook("out3.xlsx")
+outSheet = outWorkbook.add_worksheet()
 
+outSheet.write("A1", "Name")
+outSheet.write("B1", "x")
+outSheet.write("C1", "y")
+outSheet.write("D1", "traffic")
+outSheet.write("E1", "weight")
+outSheet.write("F1", "awarPoint")
+outSheet.write("G1", "distanceToCenter")
+#C:\Users\A\Documents\BTL Quy Hoạch\Thông Tin Mạng.txt
+for i in range(NumNode):
+    print("Name:",ListPosition[i].get_name(),"weight",ListPosition[i].get_weight())
+    outSheet.write(i+1, 0, ListPosition[i].get_name())
+    outSheet.write(i+1, 1, ListPosition[i].get_position_x())
+    outSheet.write(i+1, 2, ListPosition[i].get_position_y())
+    outSheet.write(i+1, 3, ListPosition[i].get_traffic())
+    outSheet.write(i+1, 4, ListPosition[i].get_weight())
+    outSheet.write(i+1, 5, ListPosition[i].get_award())
+    outSheet.write(i+1, 6, ListPosition[i].get_distance())    
 
-
-ListMentor = MENTOR.MenTor(ListPosition,MAX,C,w,RadiusRatio,0,True)
-
-ListFinish = EsauWilliam.Esau_William(ListMentor,w_ew,MAX,4,False)
-
-
-
-Node.printList2D(ListFinish)
-Node.matplot_total(ListFinish,MAX)
-Node.plt.show()
-
-
-
-
-
+outWorkbook.close()

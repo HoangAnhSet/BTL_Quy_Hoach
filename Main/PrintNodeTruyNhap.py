@@ -54,15 +54,33 @@ print("---------Kết quả topology mạng (sắp xếp theo trục tọa độ
 
 
 
-ListMentor = MENTOR.MenTor(ListPosition,MAX,C,w,RadiusRatio,0,True)
+ListMentor = MENTOR.MenTor(ListPosition,MAX,C,w,RadiusRatio,4,True)
+import xlsxwriter
+outWorkbook = xlsxwriter.Workbook("PrintNodeTruyNhap4.xlsx")
+outSheet = outWorkbook.add_worksheet()
+indexRow = 0
+indexCol = 0 
+for i in ListMentor:
+    indexCol = 0
+    for j in i:
+        outSheet.write(indexRow,indexCol, j.get_name())
+        indexCol = indexCol + 1
+        
+    indexRow = indexRow + 1
+   
+    
+# for i in ListMentor:
+#     outSheet.write(i+1, 0, ListPosition[i].get_name())
+#         for j in i:                           
+#             outSheet.write(i+1, j+1, j.get_name())
+outWorkbook.close()            
+# ListFinish = EsauWilliam.Esau_William(ListMentor,w_ew,MAX,4,False)
 
-ListFinish = EsauWilliam.Esau_William(ListMentor,w_ew,MAX,4,False)
 
 
-
-Node.printList2D(ListFinish)
-Node.matplot_total(ListFinish,MAX)
-Node.plt.show()
+# Node.printList2D(ListFinish)
+# Node.matplot_total(ListFinish,MAX)
+# Node.plt.show()
 
 
 
